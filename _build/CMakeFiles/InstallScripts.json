@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/notebooks/bertan/gqt/_build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

@@ -1,0 +1,36 @@
+{
+  "aie_partition": {
+    "name": "QoS",
+    "operations_per_cycle": "2048",
+    "inference_fingerprint": "23423",
+    "pre_post_fingerprint": "12345",
+    "partition": {
+      "column_width": 1,
+      "start_columns": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "PDIs": [
+      {
+        "uuid": "b374ff52-999d-4314-af5a-8459da6dd22a",
+        "file_name": "/notebooks/bertan/gqt/build/aie.mlir.prj/main.pdi",
+        "cdo_groups": [
+          {
+            "name": "DPU",
+            "type": "PRIMARY",
+            "pdi_id": "0x01",
+            "dpu_kernel_ids": [
+              "0x901"
+            ],
+            "pre_cdo_groups": [
+              "0xC1"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
