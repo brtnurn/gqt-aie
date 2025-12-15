@@ -1,100 +1,83 @@
-./add_wahbm.exe -x build/final.xclbin -i build/insts.bin -k MLIR_AIE -v 1
-Sequence instr count: 75
-Loading xclbin: build/final.xclbin
-Kernel opcode: MLIR_AIE
-Name: MLIR_AIE
-Registering xclbin: build/final.xclbin
-Getting hardware context.
-Getting handle to kernel:MLIR_AIE
-Writing data into buffer objects.
-Running Kernel.
 Verifying results ...
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
 Correct output 1 == 1
 Correct output 0 == 0
-Correct output 1 == 1
 Correct output 0 == 0
-Correct output 1 == 1
+Correct output 0 == 0
 Correct output 1 == 1
 Correct output 0 == 0
 Correct output 1 == 1
-Correct output 1 == 1
-Correct output 1 == 1
+Correct output 0 == 0
 Correct output 0 == 0
 Correct output 1 == 1
 Correct output 1 == 1
+Correct output 1 == 1
+Correct output 1 == 1
+Correct output 1 == 1
+Correct output 1 == 1
+Correct output 1 == 1
+Correct output 0 == 0
+Error in output 1 != 0
+Error in output 2 != 1
 Error in output 2 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 2 != 1
-Correct output 0 == 0
-Correct output 1 == 1
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 1 == 1
-Correct output 0 == 0
-Correct output 0 == 0
 Correct output 1 == 1
 Error in output 2 != 1
 Error in output 1 != 0
 Error in output 1 != 0
 Correct output 1 == 1
-Error in output 0 != 1
-Correct output 0 == 0
-Error in output 0 != 1
-Error in output 1 != 0
-Correct output 0 == 0
-Error in output 1 != 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
+Error in output 2 != 1
 Correct output 1 == 1
+Error in output 1 != 0
+Error in output 1 != 0
 Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 1 != 0
+Error in output 1 != 0
 Correct output 1 == 1
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
 Error in output 1 != 0
-Correct output 0 == 0
-Correct output 0 == 0
+Correct output 1 == 1
+Error in output 1 != 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
@@ -103,30 +86,21 @@ Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
@@ -134,79 +108,79 @@ Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
@@ -218,57 +192,40 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
@@ -276,24 +233,22 @@ Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
@@ -303,54 +258,53 @@ Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
@@ -358,76 +312,78 @@ Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
+Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
@@ -436,11 +392,15 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
@@ -452,29 +412,30 @@ Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
@@ -482,8 +443,11 @@ Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
@@ -492,45 +456,44 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
@@ -540,7 +503,9 @@ Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
@@ -550,19 +515,15 @@ Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
@@ -570,24 +531,17 @@ Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
@@ -595,146 +549,164 @@ Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
@@ -742,114 +714,109 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
-Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
@@ -867,21 +834,22 @@ Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
+Correct output 0 == 0
+Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
@@ -890,25 +858,24 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
@@ -916,59 +883,75 @@ Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
@@ -976,29 +959,36 @@ Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Error in output 0 != 1
-Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
+Correct output 0 == 0
 Error in output 0 != 1
 Error in output 0 != 1
 Error in output 0 != 1
-Correct output 0 == 0
-Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
+Error in output 0 != 1
+Error in output 0 != 1
 Correct output 0 == 0
+Error in output 0 != 1
 Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
-Error in output 0 != 1
 Correct output 0 == 0
 Error in output 0 != 1
 Correct output 0 == 0
@@ -1034,8 +1024,7 @@ Correct output 0 == 0
 Correct output 0 == 0
 Correct output 0 == 0
 
-467 mismatches.
+476 mismatches.
 
 
 fail.
-

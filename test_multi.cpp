@@ -99,6 +99,29 @@ uint32_t add_wahbm(uint32_t *R,
     return r_size;
 }
 
+void host_sum_reduction(const uint32_t* input_buffer, 
+                        uint32_t* output_buffer, 
+                        size_t num_workers, 
+                        size_t element_count) {
+    
+    // 1. Initialize output buffer to 0
+    //    Using memset for speed (0x00 bytes result in integer 0)
+    std::memset(output_buffer, 0, element_count * sizeof(uint32_t));
+
+    // 2. Accumulate
+    //    We loop through workers, then elements. This accesses 'input_buffer'
+    //    sequentially, which is friendly to the CPU cache prefetcher.
+    for (size_t w = 0; w < num_workers; ++w) {
+        
+        // Calculate the starting offset for this specific worker's data
+        size_t offset = w * element_count;
+        
+        for (size_t i = 0; i < element_count; ++i) {
+            output_buffer[i] += input_buffer[offset + i];
+        }
+    }
+}
+
 int main(int argc, const char *argv[])
 {
 	srand(time(NULL));
@@ -112,8 +135,12 @@ int main(int argc, const char *argv[])
 
     // Declaring design constants
     constexpr bool VERIFY = true;
-    constexpr int OUT_SIZE = 32 * 32;
-    constexpr int IN_SIZE = 32;
+    constexpr int WORKER_PER_COL = 4;
+    constexpr int COL_COUNT = 8;
+    constexpr int NUM_WORKERS = WORKER_PER_COL * COL_COUNT;
+    constexpr int R_SIZE = 128;
+    constexpr int OUT_SIZE = R_SIZE * NUM_WORKERS;
+    constexpr int IN_SIZE = ((R_SIZE + 31 - 1) / 31) * NUM_WORKERS;
 
     // Load instruction sequence
     std::vector<uint32_t> instr_v =
@@ -145,20 +172,20 @@ int main(int argc, const char *argv[])
     void *bufInstr = bo_instr.map<void *>();
     memcpy(bufInstr, instr_v.data(), instr_v.size() * sizeof(int));
 
-    uint32_t R[OUT_SIZE] = {0};
+    uint32_t R[R_SIZE] = {0};
     uint32_t wah[IN_SIZE];
     
     // Initialize buffer bo_inA
     DATATYPE *bufInA = bo_inA.map<DATATYPE *>();
     for (int i = 0; i < IN_SIZE; i++) {
-        uint32_t n = rand();
-        bufInA[i] = n;
-        wah[i] = n;
+        //uint32_t n = rand();
+        bufInA[i] = 7;
+        wah[i] = 7;
     }
     
     // Zero out buffer bo_outC
     DATATYPE *bufOut = bo_outC.map<DATATYPE *>();
-    memset(bufOut, 0xffffffff, OUT_SIZE * sizeof(DATATYPE));
+    memset(bufOut, 0, OUT_SIZE * sizeof(DATATYPE));
 
     // sync host to device memories
     bo_instr.sync(XCL_BO_SYNC_BO_TO_DEVICE);
@@ -170,18 +197,28 @@ int main(int argc, const char *argv[])
         std::cout << "Running Kernel.\n";
     unsigned int opcode = 3;
 
+
+    
+    
     auto start = high_resolution_clock::now();
     
     auto run =
         kernel(opcode, bo_instr, instr_v.size(), bo_inA, bo_outC);
     run.wait();
-
-    auto stop = high_resolution_clock::now();
-    auto npu = duration_cast<microseconds>(stop - start);
     
     // Sync device to host memories
     bo_outC.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
 
+
+    uint32_t out[R_SIZE] = {0};
+    host_sum_reduction(bufOut, 
+                       out, 
+                       NUM_WORKERS, 
+                       R_SIZE);
+    
+    auto stop = high_resolution_clock::now();
+    auto npu = duration_cast<microseconds>(stop - start);
+    
     // Compare out to golden
     int errors = 0;
     if (verbosity >= 1)
@@ -189,29 +226,33 @@ int main(int argc, const char *argv[])
         std::cout << "Verifying results ..." << std::endl;
     }
 
-    start = high_resolution_clock::now();    
-    uint32_t used = add_wahbm(R, OUT_SIZE, wah, IN_SIZE);
+    const int PART_SIZE = IN_SIZE / NUM_WORKERS;
+    
+    start = high_resolution_clock::now();
+
+    for(int part = 0; part < NUM_WORKERS; ++part) {
+        add_wahbm(R, R_SIZE, &wah[part * PART_SIZE], PART_SIZE);
+    }
+    
     stop = high_resolution_clock::now();
     auto cpu = duration_cast<microseconds>(stop - start);
     
-    for (uint32_t i = 0; i < IN_SIZE; i++)
+    for (uint32_t i = 0; i < R_SIZE; i++)
     {
-        for(uint32_t j = 0; j < 32; j++) {
             
-            int32_t ref = R[i * 32 + j];
-            int32_t test = bufOut[i * 32 + j];
-            
-            if (test != ref)
-            {
-                if (verbosity >= 1)
-                    std::cout << "Error in output " << test << " != " << ref << std::endl;
-                errors++;
-            }
-            else
-            {
-                if (verbosity >= 1)
-                    std::cout << "Correct output " << test << " == " << ref << std::endl;
-            }
+        int32_t ref = R[i];
+        int32_t test = out[i];
+        
+        if (test != ref)
+        {
+            if (verbosity >= 1)
+                std::cout << "Error in output " << test << " != " << ref << std::endl;
+            errors++;
+        }
+        else
+        {
+            if (verbosity >= 1)
+                std::cout << "Correct output " << test << " == " << ref << std::endl;
         }
     }
 

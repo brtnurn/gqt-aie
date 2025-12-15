@@ -1,3 +1,0 @@
-/notebooks/bertan/gqt/_build/CMakeFiles/add_wahbm.dir
-/notebooks/bertan/gqt/_build/CMakeFiles/edit_cache.dir
-/notebooks/bertan/gqt/_build/CMakeFiles/rebuild_cache.dir

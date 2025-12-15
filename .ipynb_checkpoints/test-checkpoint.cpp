@@ -112,8 +112,8 @@ int main(int argc, const char *argv[])
 
     // Declaring design constants
     constexpr bool VERIFY = true;
+    constexpr int OUT_SIZE = 32 * 32;
     constexpr int IN_SIZE = 32;
-    constexpr int OUT_SIZE = IN_SIZE * 32;
 
     // Load instruction sequence
     std::vector<uint32_t> instr_v =
@@ -158,7 +158,7 @@ int main(int argc, const char *argv[])
     
     // Zero out buffer bo_outC
     DATATYPE *bufOut = bo_outC.map<DATATYPE *>();
-    memset(bufOut, 0, OUT_SIZE * sizeof(DATATYPE));
+    memset(bufOut, 0xffffffff, OUT_SIZE * sizeof(DATATYPE));
 
     // sync host to device memories
     bo_instr.sync(XCL_BO_SYNC_BO_TO_DEVICE);
@@ -196,7 +196,6 @@ int main(int argc, const char *argv[])
     
     for (uint32_t i = 0; i < IN_SIZE; i++)
     {
-        int32_t word = bufInA[i];
         for(uint32_t j = 0; j < 32; j++) {
             
             int32_t ref = R[i * 32 + j];

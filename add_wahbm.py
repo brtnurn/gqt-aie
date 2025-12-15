@@ -4,13 +4,13 @@ from aie.iron import Program, Runtime, Worker, Kernel, ObjectFifo
 from aie.iron.placers import SequentialPlacer
 from aie.iron.device import NPU2Col1
 
-input_size = 128
+input_size = 32
 output_size = input_size * 32
 
 dev = NPU2Col1()
 
-input_ty = np.ndarray[(input_size,), np.dtype[np.int32]]
-output_ty = np.ndarray[(output_size,), np.dtype[np.int32]]
+input_ty = np.ndarray[(input_size,), np.dtype[np.uint32]]
+output_ty = np.ndarray[(output_size,), np.dtype[np.uint32]]
 
 add_fn = Kernel("aie_add_wahbm", "add_wahbm.cc.o", [output_ty, np.int32, input_ty, np.int32])
 
