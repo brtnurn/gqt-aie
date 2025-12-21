@@ -1,0 +1,78 @@
+# Makefile for AIE kernel builds
+# Usage:
+#   make -f Makefile.aie NUM_VARIANTS=1000    # Build for 1000 variants
+#   make -f Makefile.aie NUM_VARIANTS=15000   # Build for max size (15000)
+#   make -f Makefile.aie clean
+
+# Default number of variants (max supported)
+NUM_VARIANTS ?= 15000
+
+# Paths
+BUILD_DIR = build
+AIEOPT_DIR = $(shell dirname $(shell which aie-opt))/..
+PEANO = $(PEANO_INSTALL_DIR)/bin/clang++
+
+# Compiler flags
+PEANO_FLAGS = -O1 -std=c++20 --target=aie2p-none-unknown-elf \
+    -Wno-parentheses -Wno-attributes -Wno-macro-redefined -Wno-empty-body \
+    -DNDEBUG -I $(AIEOPT_DIR)/include
+
+.PHONY: all clean kernel info
+
+all: kernel
+
+info:
+	@echo "=== AIE Kernel Build ==="
+	@echo "NUM_VARIANTS: $(NUM_VARIANTS)"
+	@echo "BUILD_DIR: $(BUILD_DIR)"
+	@echo "AIEOPT_DIR: $(AIEOPT_DIR)"
+	@echo "PEANO: $(PEANO)"
+	@echo ""
+
+# Create build directory
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+
+# Generate MLIR from Python
+$(BUILD_DIR)/add_wahbm.mlir: add_wahbm_gqt.py | $(BUILD_DIR)
+	@echo ">>> Generating MLIR for $(NUM_VARIANTS) variants..."
+	python add_wahbm_gqt.py --num_variants $(NUM_VARIANTS) > $@
+
+# Compile AIE C++ kernel
+$(BUILD_DIR)/add_wahbm.cc.o: add_wahbm.cc | $(BUILD_DIR)
+	@echo ">>> Compiling AIE kernel..."
+	cd $(BUILD_DIR) && $(PEANO) $(PEANO_FLAGS) -c ../$< -o $(notdir $@)
+
+# Generate xclbin
+$(BUILD_DIR)/final.xclbin: $(BUILD_DIR)/add_wahbm.mlir $(BUILD_DIR)/add_wahbm.cc.o
+	@echo ">>> Generating xclbin (this may take a few minutes)..."
+	cd $(BUILD_DIR) && aiecc.py --aie-generate-xclbin --aie-generate-npu-insts \
+		--no-compile-host --no-xchesscc --no-xbridge \
+		--xclbin-name=final.xclbin --npu-insts-name=insts.bin \
+		add_wahbm.mlir
+
+kernel: info $(BUILD_DIR)/final.xclbin
+	@echo ""
+	@echo "=== Build Complete ==="
+	@echo "Files created:"
+	@ls -la $(BUILD_DIR)/final.xclbin $(BUILD_DIR)/insts.bin
+	@echo ""
+	@echo "To test:"
+	@echo "  cd gqt && bin/test_aie_gqt <your_file.gqt> ../build/final.xclbin ../build/insts.bin"
+
+clean:
+	rm -rf $(BUILD_DIR)
+
+# Convenience targets for common sizes
+kernel-1k:
+	$(MAKE) -f Makefile.aie NUM_VARIANTS=1024
+
+kernel-5k:
+	$(MAKE) -f Makefile.aie NUM_VARIANTS=5000
+
+kernel-10k:
+	$(MAKE) -f Makefile.aie NUM_VARIANTS=10000
+
+kernel-max:
+	$(MAKE) -f Makefile.aie NUM_VARIANTS=15000
+
