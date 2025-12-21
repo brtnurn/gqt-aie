@@ -138,7 +138,7 @@ int main(int argc, const char *argv[])
     constexpr int WORKER_PER_COL = 4;
     constexpr int COL_COUNT = 8;
     constexpr int NUM_WORKERS = WORKER_PER_COL * COL_COUNT;
-    constexpr int R_SIZE = 128;
+    constexpr int R_SIZE = 8192;
     constexpr int OUT_SIZE = R_SIZE * NUM_WORKERS;
     constexpr int IN_SIZE = ((R_SIZE + 31 - 1) / 31) * NUM_WORKERS;
 
@@ -178,9 +178,9 @@ int main(int argc, const char *argv[])
     // Initialize buffer bo_inA
     DATATYPE *bufInA = bo_inA.map<DATATYPE *>();
     for (int i = 0; i < IN_SIZE; i++) {
-        //uint32_t n = rand();
-        bufInA[i] = 7;
-        wah[i] = 7;
+        uint32_t n = rand();
+        bufInA[i] = n;
+        wah[i] = n;
     }
     
     // Zero out buffer bo_outC
@@ -197,9 +197,6 @@ int main(int argc, const char *argv[])
         std::cout << "Running Kernel.\n";
     unsigned int opcode = 3;
 
-
-    
-    
     auto start = high_resolution_clock::now();
     
     auto run =

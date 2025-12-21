@@ -39,7 +39,7 @@ endif
 
 
 devicename ?= $(if $(filter 1,$(NPU2)),npu2,npu)
-targetname = add_wahbm
+targetname = add_wahbm_multi
 
 all: build/final.xclbin ${targetname}.exe
 
@@ -70,7 +70,7 @@ build/final.xclbin: build/aie.mlir build/add_wahbm.cc.o
 		--no-xchesscc --no-xbridge \
 		--xclbin-name=${@F} --npu-insts-name=insts.bin ${<:%=../%}
 		
-${targetname}.exe: ${srcdir}/test.cpp
+${targetname}.exe: ${srcdir}/test_multi.cpp
 	rm -rf _build
 	mkdir -p _build
 	cd _build && ${powershell} cmake `${getwslpath} ${srcdir}` -DTARGET_NAME=${targetname}

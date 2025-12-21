@@ -224,8 +224,8 @@ extern "C"
         int N = wah_size / vec_factor;
         uint32_t *__restrict pWah = wah;
 
-        aie::vector<uint32_t, vec_factor> zero_vec      = aie::broadcast<uint32_t, vec_factor>(0u);
-        aie::vector<uint32_t, vec_factor> one_vec       = aie::broadcast<uint32_t, vec_factor>(1u);
+        aie::vector<uint32_t, vec_factor> zero_vec = aie::broadcast<uint32_t, vec_factor>(0u);
+        aie::vector<uint32_t, vec_factor> one_vec = aie::broadcast<uint32_t, vec_factor>(1u);
         aie::vector<uint32_t, vec_factor> fill_ones_vec = aie::broadcast<uint32_t, vec_factor>(0x7fffffffu);
 
         for(uint32_t i = 0; i < N; i++) {
@@ -240,7 +240,6 @@ extern "C"
             
             aie::vector<uint32_t, vec_factor> fill_bits_vec = aie::bit_and(0x40000000u, wah_vec);
             aie::mask<32> fill_bits_mask = aie::neq(zero_vec, fill_bits_vec);
-
 
             aie::vector<uint32_t, vec_factor> y2 = aie::select(zero_vec, fill_ones_vec, fill_bits_mask);
             aie::vector<uint32_t, vec_factor> bits_vec = aie::select(wah_vec, y2, msb_mask);
@@ -324,6 +323,39 @@ extern "C"
         }
     
         return r_size;
+    }
+
+    uint32_t aie_sum_reduction(uint32_t *ins,
+                               uint32_t w,
+                               uint32_t *out,
+                               uint32_t out_size)
+
+    {
+        constexpr int vec_factor = 32;
+        
+        uint32_t *__restrict pIns = ins;
+        uint32_t *__restrict pOut = out;
+
+        uint32 i = 0;
+        for(; i + vec_factor <= out_size; i += vec_factor) {
+
+            aie::vector<uint32_t, vec_factor> sums = aie::zeros();
+            for(uint32_t j = 0; j < w; j++) {
+                pIns = ins + w * out_size + i;
+                aie::vector<uint32_t, vec_factor> in = aie::load_v<vec_factor>(pIns)
+                sums = aie::add(sums, in);
+            }
+            aie::store_v(pOut, sums);
+            pOut += vec_factor;
+        }
+        
+        for (; i < out_len; i++) {
+            uint32_t s = 0;
+            for (uint32_t t = 0; t < w; w++) {
+              s += ins[t * out_len + i];
+            }
+            out[i] = s;
+          }
     }
 
 }

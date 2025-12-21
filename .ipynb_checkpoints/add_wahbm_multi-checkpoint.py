@@ -7,7 +7,7 @@ from aie.helpers.taplib import TensorAccessPattern, TensorTiler2D
 dev = NPU2()
 
 def my_add_wahbm():
-    num_variant = 256
+    num_variant = 8192
     worker_per_col = 4
     column_count = 8
     num_workers = worker_per_col * column_count
@@ -31,25 +31,7 @@ def my_add_wahbm():
 
     taps_in = TensorTiler2D.simple_tiler((input_size,), (col_input_size,))
     taps_out = TensorTiler2D.simple_tiler((output_size,), (col_output_size,))
-    """
-    for c in range(column_count):
-        taps_in.append(
-            TensorAccessPattern(
-                (input_size,),
-                offset=c * col_input_size,
-                sizes=[col_input_size],
-                strides=[1],
-            )
-        )
-        taps_out.append(
-            TensorAccessPattern(
-                (output_size,),
-                offset=c * col_output_size,
-                sizes=[col_output_size],
-                strides=[1],
-            )
-        )
-    """
+    
     add_fn = Kernel(
         "aie_add_wahbm",
         "add_wahbm.cc.o",

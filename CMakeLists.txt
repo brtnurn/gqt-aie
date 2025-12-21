@@ -28,7 +28,7 @@ else()
     set(XRT_LIB_DIR C:/Technical/xrtNPUfromDLL CACHE STRING "Path to xrt_coreutil.lib")
 endif()
 
-set(TARGET_NAME add_wahbm CACHE STRING "Target to be built")
+set(TARGET_NAME add_wahbm_multi CACHE STRING "Target to be built")
 
 SET (ProjectName proj_${TARGET_NAME})
 SET (currentTarget ${TARGET_NAME})
@@ -41,7 +41,7 @@ endif ()
 project(${ProjectName})
 
 
-add_executable(${currentTarget} test.cpp)
+add_executable(${currentTarget} test_multi.cpp)
 
 target_include_directories (${currentTarget} PUBLIC ${XRT_INC_DIR})
 
