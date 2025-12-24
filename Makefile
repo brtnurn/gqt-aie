@@ -70,7 +70,7 @@ build/final.xclbin: build/aie.mlir build/add_wahbm.cc.o
 		--no-xchesscc --no-xbridge \
 		--xclbin-name=${@F} --npu-insts-name=insts.bin ${<:%=../%}
 		
-${targetname}.exe: ${srcdir}/test_multi.cpp
+${targetname}.exe: ${srcdir}/test_batch.cpp
 	rm -rf _build
 	mkdir -p _build
 	cd _build && ${powershell} cmake `${getwslpath} ${srcdir}` -DTARGET_NAME=${targetname}
@@ -82,9 +82,13 @@ else
 endif
 
 
-COUNT="1024"
+# Parameters for batch processing (can override on command line)
+SAMPLES ?= 64
+VARIANTS ?= 8192
+
 run: ${targetname}.exe build/final.xclbin
-	${powershell} ./$< -x build/final.xclbin -i build/insts.bin -k MLIR_AIE -v 1
+	${powershell} ./$< -x build/final.xclbin -i build/insts.bin -k MLIR_AIE -v 1 \
+		--total-samples ${SAMPLES} --total-variants ${VARIANTS}
 
 clean:
 	rm -rf build _build ${targetname}.exe

@@ -1,0 +1,250 @@
+=== Batch Processing Test Results ===
+Date: Wed Dec 24 07:27:11 PM UTC 2025
+
+=== Test Group 1: Varying samples, 1 variant batch (7471 variants) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 1, Total NPU calls: 1
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=7471
+Sample batches: 2, Variant batches: 1, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=96 VARIANTS=7471
+Sample batches: 3, Variant batches: 1, Total NPU calls: 3
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=128 VARIANTS=7471
+Sample batches: 4, Variant batches: 1, Total NPU calls: 4
+RESULT: FAIL
+  11 mismatches out of 7471 variants.
+Error at variant 7441: NPU=9 CPU=7
+Error at variant 7442: NPU=7 CPU=5
+Error at variant 7444: NPU=11 CPU=7
+Error at variant 7446: NPU=11 CPU=9
+Error at variant 7447: NPU=10 CPU=8
+
+=== Test Group 2: Varying samples, 2 variant batches (14942 variants) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=14942
+Sample batches: 2, Variant batches: 2, Total NPU calls: 4
+RESULT: FAIL
+  12 mismatches out of 14942 variants.
+Error at variant 14912: NPU=8 CPU=5
+Error at variant 14914: NPU=9 CPU=6
+Error at variant 14915: NPU=6 CPU=5
+Error at variant 14916: NPU=5 CPU=4
+Error at variant 14917: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=96 VARIANTS=14942
+Sample batches: 3, Variant batches: 2, Total NPU calls: 6
+RESULT: FAIL
+  15 mismatches out of 14942 variants.
+Error at variant 14912: NPU=14 CPU=6
+Error at variant 14913: NPU=4 CPU=3
+Error at variant 14914: NPU=18 CPU=9
+Error at variant 14915: NPU=11 CPU=5
+Error at variant 14916: NPU=10 CPU=5
+
+----------------------------------------
+SAMPLES=128 VARIANTS=14942
+Sample batches: 4, Variant batches: 2, Total NPU calls: 8
+RESULT: FAIL
+  15 mismatches out of 14942 variants.
+Error at variant 14912: NPU=23 CPU=9
+Error at variant 14913: NPU=8 CPU=4
+Error at variant 14914: NPU=27 CPU=9
+Error at variant 14915: NPU=18 CPU=7
+Error at variant 14916: NPU=15 CPU=5
+
+=== Test Group 3: 32 samples, varying variant batches ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 1, Total NPU calls: 1
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=22413
+Sample batches: 1, Variant batches: 3, Total NPU calls: 3
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: FAIL
+  12 mismatches out of 29884 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=32 VARIANTS=37355
+Sample batches: 1, Variant batches: 5, Total NPU calls: 5
+RESULT: FAIL
+  12 mismatches out of 37355 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=32 VARIANTS=44826
+Sample batches: 1, Variant batches: 6, Total NPU calls: 6
+RESULT: FAIL
+  26 mismatches out of 44826 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=32 VARIANTS=52297
+Sample batches: 1, Variant batches: 7, Total NPU calls: 7
+RESULT: FAIL
+  26 mismatches out of 52297 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=32 VARIANTS=59768
+Sample batches: 1, Variant batches: 8, Total NPU calls: 8
+RESULT: FAIL
+  41 mismatches out of 59768 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+=== Test Group 4: 32 samples, fine-grained variant search ===
+----------------------------------------
+SAMPLES=32 VARIANTS=25000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=27000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: FAIL
+  12 mismatches out of 29884 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+=== Test Group 5: Same total NPU calls, different configurations ===
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: FAIL
+  12 mismatches out of 29884 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=64 VARIANTS=14942
+Sample batches: 2, Variant batches: 2, Total NPU calls: 4
+RESULT: FAIL
+  12 mismatches out of 14942 variants.
+Error at variant 14912: NPU=8 CPU=5
+Error at variant 14914: NPU=9 CPU=6
+Error at variant 14915: NPU=6 CPU=5
+Error at variant 14916: NPU=5 CPU=4
+Error at variant 14917: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=128 VARIANTS=7471
+Sample batches: 4, Variant batches: 1, Total NPU calls: 4
+RESULT: FAIL
+  11 mismatches out of 7471 variants.
+Error at variant 7441: NPU=9 CPU=7
+Error at variant 7442: NPU=7 CPU=5
+Error at variant 7444: NPU=11 CPU=7
+Error at variant 7446: NPU=11 CPU=9
+Error at variant 7447: NPU=10 CPU=8
+
+----------------------------------------
+SAMPLES=32 VARIANTS=44826
+Sample batches: 1, Variant batches: 6, Total NPU calls: 6
+RESULT: FAIL
+  26 mismatches out of 44826 variants.
+Error at variant 29854: NPU=4 CPU=1
+Error at variant 29856: NPU=4 CPU=1
+Error at variant 29857: NPU=4 CPU=3
+Error at variant 29858: NPU=3 CPU=2
+Error at variant 29859: NPU=4 CPU=2
+
+----------------------------------------
+SAMPLES=64 VARIANTS=22413
+Sample batches: 2, Variant batches: 3, Total NPU calls: 6
+RESULT: FAIL
+  27 mismatches out of 22413 variants.
+Error at variant 7441: NPU=6 CPU=3
+Error at variant 7443: NPU=3 CPU=0
+Error at variant 7444: NPU=5 CPU=4
+Error at variant 7445: NPU=2 CPU=1
+Error at variant 7446: NPU=7 CPU=5
+
+----------------------------------------
+SAMPLES=96 VARIANTS=14942
+Sample batches: 3, Variant batches: 2, Total NPU calls: 6
+RESULT: FAIL
+  15 mismatches out of 14942 variants.
+Error at variant 14912: NPU=14 CPU=6
+Error at variant 14913: NPU=4 CPU=3
+Error at variant 14914: NPU=18 CPU=9
+Error at variant 14915: NPU=11 CPU=5
+Error at variant 14916: NPU=10 CPU=5
+
+=== Test Group 6: Minimal tests (baseline) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 1, Total NPU calls: 1
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=7471
+Sample batches: 2, Variant batches: 1, Total NPU calls: 2
+RESULT: PASS
+

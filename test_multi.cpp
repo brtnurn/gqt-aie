@@ -138,7 +138,7 @@ int main(int argc, const char *argv[])
     constexpr int WORKER_PER_COL = 4;
     constexpr int COL_COUNT = 8;
     constexpr int NUM_WORKERS = WORKER_PER_COL * COL_COUNT;
-    constexpr int R_SIZE = 8192;
+    constexpr int R_SIZE = 4096;
     constexpr int OUT_SIZE = R_SIZE * NUM_WORKERS;
     constexpr int IN_SIZE = ((R_SIZE + 31 - 1) / 31) * NUM_WORKERS;
 
@@ -202,19 +202,28 @@ int main(int argc, const char *argv[])
     auto run =
         kernel(opcode, bo_instr, instr_v.size(), bo_inA, bo_outC);
     run.wait();
+
+    auto stop = high_resolution_clock::now();
+    auto npu = duration_cast<microseconds>(stop - start);
+
+    start = high_resolution_clock::now();
     
     // Sync device to host memories
     bo_outC.sync(XCL_BO_SYNC_BO_FROM_DEVICE);
 
+    stop = high_resolution_clock::now();
+    auto sync = duration_cast<microseconds>(stop - start);
 
+    start = high_resolution_clock::now();
+    
     uint32_t out[R_SIZE] = {0};
     host_sum_reduction(bufOut, 
                        out, 
                        NUM_WORKERS, 
                        R_SIZE);
     
-    auto stop = high_resolution_clock::now();
-    auto npu = duration_cast<microseconds>(stop - start);
+    stop = high_resolution_clock::now();
+    auto sum_red = duration_cast<microseconds>(stop - start);
     
     // Compare out to golden
     int errors = 0;
@@ -261,6 +270,10 @@ int main(int argc, const char *argv[])
                   << std::endl;
         std::cout << "Time taken by NPU function: "
          << npu.count() << " microseconds" << std::endl;
+        std::cout << "Time taken by sync op: "
+         << sync.count() << " microseconds" << std::endl;
+        std::cout << "Time taken by sum_red op: "
+         << sum_red.count() << " microseconds" << std::endl;
         std::cout << "Time taken by CPU function: "
          << cpu.count() << " microseconds" << std::endl;
         return 0;

@@ -1,0 +1,154 @@
+=== Batch Processing Test Results ===
+Date: Wed Dec 24 08:15:08 PM UTC 2025
+
+=== Test Group 1: Varying samples, 1 variant batch (7471 variants) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=7471
+Sample batches: 2, Variant batches: 2, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=96 VARIANTS=7471
+Sample batches: 3, Variant batches: 2, Total NPU calls: 6
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=128 VARIANTS=7471
+Sample batches: 4, Variant batches: 2, Total NPU calls: 8
+RESULT: PASS
+
+=== Test Group 2: Varying samples, 2 variant batches (14942 variants) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 3, Total NPU calls: 3
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=14942
+Sample batches: 2, Variant batches: 3, Total NPU calls: 6
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=96 VARIANTS=14942
+Sample batches: 3, Variant batches: 3, Total NPU calls: 9
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=128 VARIANTS=14942
+Sample batches: 4, Variant batches: 3, Total NPU calls: 12
+RESULT: PASS
+
+=== Test Group 3: 32 samples, varying variant batches ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 3, Total NPU calls: 3
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=22413
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 5, Total NPU calls: 5
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=37355
+Sample batches: 1, Variant batches: 6, Total NPU calls: 6
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=44826
+Sample batches: 1, Variant batches: 7, Total NPU calls: 7
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=52297
+Sample batches: 1, Variant batches: 8, Total NPU calls: 8
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=59768
+Sample batches: 1, Variant batches: 9, Total NPU calls: 9
+RESULT: PASS
+
+=== Test Group 4: 32 samples, fine-grained variant search ===
+----------------------------------------
+SAMPLES=32 VARIANTS=25000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=27000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29000
+Sample batches: 1, Variant batches: 4, Total NPU calls: 4
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 5, Total NPU calls: 5
+RESULT: PASS
+
+=== Test Group 5: Same total NPU calls, different configurations ===
+----------------------------------------
+SAMPLES=32 VARIANTS=29884
+Sample batches: 1, Variant batches: 5, Total NPU calls: 5
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=14942
+Sample batches: 2, Variant batches: 3, Total NPU calls: 6
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=128 VARIANTS=7471
+Sample batches: 4, Variant batches: 2, Total NPU calls: 8
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=44826
+Sample batches: 1, Variant batches: 7, Total NPU calls: 7
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=22413
+Sample batches: 2, Variant batches: 4, Total NPU calls: 8
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=96 VARIANTS=14942
+Sample batches: 3, Variant batches: 3, Total NPU calls: 9
+RESULT: PASS
+
+=== Test Group 6: Minimal tests (baseline) ===
+----------------------------------------
+SAMPLES=32 VARIANTS=7471
+Sample batches: 1, Variant batches: 2, Total NPU calls: 2
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=32 VARIANTS=14942
+Sample batches: 1, Variant batches: 3, Total NPU calls: 3
+RESULT: PASS
+
+----------------------------------------
+SAMPLES=64 VARIANTS=7471
+Sample batches: 2, Variant batches: 2, Total NPU calls: 4
+RESULT: PASS
+

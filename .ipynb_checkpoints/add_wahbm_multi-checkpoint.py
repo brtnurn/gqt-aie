@@ -7,7 +7,7 @@ from aie.helpers.taplib import TensorAccessPattern, TensorTiler2D
 dev = NPU2()
 
 def my_add_wahbm():
-    num_variant = 8192
+    num_variant = 7440
     worker_per_col = 4
     column_count = 8
     num_workers = worker_per_col * column_count
@@ -80,9 +80,13 @@ def my_add_wahbm():
     rt = Runtime()
     with rt.sequence(in_ty, out_ty) as (a_in, a_out):
         rt.start(*workers)
+        tg = rt.task_group()
         for c in range(column_count):
             rt.fill(ofs_col_in[c].prod(), a_in, taps_in[c], placement=Tile(c, 0))
             rt.drain(ofs_col_out[c].cons(), a_out, taps_out[c], placement=Tile(c, 0), wait=True)
+            rt.finish_task_group(tg)
+            tg = rt.task_group()
+        rt.finish_task_group(tg)
 
     my_program = Program(dev, rt)
     module = my_program.resolve_program(SequentialPlacer())

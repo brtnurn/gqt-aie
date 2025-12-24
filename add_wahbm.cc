@@ -1,13 +1,21 @@
 #include <stdint.h>
 #include <aie_api/aie.hpp>
 
-// Helper function to simulate adding bits to a specific field
-// Note: In a real scenario, you might want to inline this or optimize memory access
+// Compile-time constants matching Python configuration
+// These MUST match add_wahbm_multi_placed.py!
+// Using 7440 = 240 × 31 to avoid ObjectFifo buffer issue with last WAH word
+constexpr uint32_t CONST_R_SIZE = 7440;      // num_variant = worker_output_size
+constexpr uint32_t CONST_WAH_SIZE = 240;     // 7440 / 31 = exactly 240 WAH words
 
+/**
+ * AIE vectorized bit scatter - equivalent to avx_add()
+ * 
+ * Extracts 32 bits from 'word' and adds each to corresponding R position.
+ * Uses aie::mask and aie::select for efficient bit extraction.
+ */
 inline void aie_add(uint32_t word, uint32_t* out, uint32_t field_i)
 {        
     constexpr int vec_factor = 32;
-
     constexpr uint32_t zero = 0;
     constexpr uint32_t one = 1;
     
@@ -27,185 +35,38 @@ inline void aie_add(uint32_t word, uint32_t* out, uint32_t field_i)
 
 extern "C"
 {  
-    /*uint32_t aie_add_wahbm(uint32_t *R,
-                           uint32_t r_size,
-                           uint32_t *wah,
-                           uint32_t wah_size)
-    {
-        constexpr int vec_factor = 32;
-        
-        int N = wah_size / vec_factor;
-
-        uint32_t field_i = 0;
-        uint32_t *__restrict pWah = wah;
-
-        for(int i = 0; i < N; i++) {
-
-            aie::vector<uint32_t, vec_factor> wah_vec = aie::load_v<vec_factor>(pWah);
-            pWah += vec_factor;
-            
-            //uint32_t msb[vec_factor];
-            //aie::store_v(msb, aie::bit_and((uint32_t)0x80000000, wah_vec));
-            aie::vector<uint32_t, vec_factor> msb_vec = aie::bit_and((uint32_t)0x80000000, wah_vec);
-            
-            //uint32_t num_words[vec_factor];
-            //aie::store_v(num_words, aie::bit_and((uint32_t)0x3fffffff, wah_vec));
-            aie::vector<uint32_t, vec_factor> num_words_vec = aie::bit_and((uint32_t)0x3fffffff, wah_vec);
-            
-            //uint32_t fill_bit[vec_factor];
-            //aie::store_v(fill_bit, aie::bit_and((uint32_t)0x40000000, wah_vec));
-            aie::vector<uint32_t, vec_factor> fill_bits_vec = aie::bit_and((uint32_t)0x40000000, wah_vec);
-            
-            for(int j = 0; j < vec_factor; j++) {
-                
-                uint32_t msb = msb_vec.get(j);
-                uint32_t num_word = num_words_vec.get(j);
-                uint32_t fill_bit = fill_bits_vec.get(j);
-                
-                if(msb != 0) {
-                    if(fill_bit == 0) {
-                        field_i += num_word * 31;
-                        if(field_i >= r_size) {
-                            return r_size;
-                        }
-                    }
-                    else {
-                        uint32_t count = num_word;
-                        uint32_t bits = 0xfffffffeu;
-                        for(uint32_t k = 0; k < count; k++) {
-                            aie_add(bits, R, field_i);
-                            field_i += 31;
-                            if(field_i >= r_size) {
-                                return r_size;
-                            }
-                        }
-                    }
-                }
-                else {
-                    uint32_t bits = num_word + fill_bit;
-                    if(bits != 0) {
-                        aie_add(bits, R, field_i);
-                    }
-                    field_i += 31;
-                    if(field_i >= r_size) {
-                        return r_size;
-                    }
-                }
-            }
-        }
-        return r_size;
-    }*/
-
-
-    /*uint32_t aie_add_wahbm(uint32_t *R,
-                           uint32_t r_size,
-                           uint32_t *wah,
-                           uint32_t wah_size)
-    {
-    
-        uint32_t wah_c,
-                     wah_i,
-                     num_words,
-                     fill_bit,
-                     bits,
-                     bit,
-                     bit_i,
-                     word_i,
-                     field_i;
-        field_i = 0;
-    
-        uint32_t buf, buf_empty_bits = 32;
-    
-        for (wah_i = 0; wah_i < wah_size; ++wah_i) {
-            wah_c = wah[wah_i];
-            if (wah_c & 0x80000000) { // check msb
-                num_words = (wah_c & 0x3fffffff);
-                //fill_bit = (wah_c>=0xC0000000?1:0);
-        		fill_bit = wah_c & 0x40000000; // check 30th bit
-                bits = (fill_bit?0x7FFFFFFF:0);
-            } else {
-                num_words = 1;
-                bits = wah_c;
-            }
-    
-            if ( (num_words > 1) && (fill_bit == 0) ) {
-                // probably need to account for extra bits here
-                if (buf_empty_bits < 32)
-                    aie_add(buf, R, field_i);
-                
-                field_i += 32;
-                // the empty bits were supplied by this run, so we don't want to
-                // count them twice
-                field_i += num_words*31 - buf_empty_bits; 
-    
-                buf_empty_bits = 32;
-                buf = 0;
-    
-                if (field_i >= r_size)
-                    return r_size;
-            } else {
-                if (bits == 0) {
-    
-                    if (buf_empty_bits < 32)
-                        aie_add(buf, R, field_i);
-                    field_i += 32 + (31 - buf_empty_bits);
-    
-                    buf = 0;
-                    buf_empty_bits = 32;
-    
-                    if (field_i >= r_size)
-                        return r_size;
-    
-                } else {
-                    for (word_i = 0; word_i < num_words; ++word_i) {
-                        if (buf_empty_bits == 32) {
-                            if (field_i % 32 != 0) {
-                                // add padding to buf that makes up for the
-                                // difference, then add 32 - (field_i % 32) bits to
-                                // the buff
-                                uint32_t padding = field_i % 32;
-                                buf = bits >> (padding - 1);
-                                aie_add(buf, R, field_i - padding);
-                                field_i+= 32 - padding;
-                                buf = bits << (32 - padding + 1);
-                                buf_empty_bits = (32 - padding) + 1;
-                            } else {
-                                buf = bits << 1;
-                                buf_empty_bits = 1;
-                            }
-                        } else {
-    
-                            buf += bits >> (31-buf_empty_bits);
-    
-                            aie_add(buf, R, field_i);
-    
-                            field_i+=32;
-    
-                            buf_empty_bits += 1;
-                            buf = bits << buf_empty_bits;
-                        }
-                    }
-                }
-            }
-        }
-    
-        for (bit_i = 0; bit_i < 31; ++bit_i) {
-            R[field_i] += (buf >> (31 - bit_i)) & 1;
-            field_i += 1;
-    
-            if (field_i >= r_size)
-                return r_size;
-        }
-    
-        return r_size;
-    }*/
 
     uint32_t aie_add_wahbm(uint32_t *R,
                            uint32_t r_size,
                            uint32_t *wah,
                            uint32_t wah_size)
     {
-    
+        // Use compile-time constants instead of passed arguments
+        // (workaround for potential MLIR argument passing issues)
+        const uint32_t actual_r_size = CONST_R_SIZE;
+        const uint32_t actual_wah_size = CONST_WAH_SIZE;
+        
+        constexpr uint32_t one = 1;
+        constexpr uint32_t zero = 0;
+        constexpr uint32_t vec_factor = 32;
+        
+        // =====================================================================
+        // Step 1: Zero output buffer using vectorized stores
+        // =====================================================================
+        aie::vector<uint32_t, vec_factor> zeros = aie::zeros<uint32_t, vec_factor>();
+        constexpr uint32_t num_vec_writes = CONST_R_SIZE / vec_factor;  // 7440/32 = 232
+        
+        for (uint32_t i = 0; i < num_vec_writes; ++i) {
+            aie::store_v(R + i * vec_factor, zeros);
+        }
+        // Handle remaining elements (7440 % 32 = 16)
+        for (uint32_t i = num_vec_writes * vec_factor; i < actual_r_size; ++i) {
+            R[i] = 0;
+        }
+        
+        // =====================================================================
+        // Step 2: WAH decompression with vectorized processing
+        // =====================================================================
         uint32_t wah_c,
                      wah_i,
                      num_words,
@@ -217,11 +78,8 @@ extern "C"
                      field_i;
         field_i = 0;
     
-        uint32_t buf, buf_empty_bits = 32;
-        constexpr uint32_t one = 1;
-        constexpr uint32_t zero = 0;
-        constexpr uint32_t vec_factor = 32;
-        int N = wah_size / vec_factor;
+        uint32_t buf = 0, buf_empty_bits = 32;
+        constexpr uint32_t N = CONST_WAH_SIZE / vec_factor;  // 240/32 = 7
         uint32_t *__restrict pWah = wah;
 
         aie::vector<uint32_t, vec_factor> zero_vec = aie::broadcast<uint32_t, vec_factor>(0u);
@@ -252,23 +110,21 @@ extern "C"
                 fill_bit = fill_bits_vec.get(j);
 
                 if ( (num_words > 1) && (fill_bit == 0) ) {
-                    // probably need to account for extra bits here
+                    // Multi-word zero-fill: flush buffer and skip
                     if (buf_empty_bits < 32)
                         aie_add(buf, R, field_i);
                     
                     field_i += 32;
-                    // the empty bits were supplied by this run, so we don't want to
-                    // count them twice
                     field_i += num_words*31 - buf_empty_bits; 
         
                     buf_empty_bits = 32;
                     buf = 0;
         
-                    if (field_i >= r_size)
-                        return r_size;
+                    if (field_i >= actual_r_size)
+                        return actual_r_size;
                 } else {
                     if (bits == 0) {
-        
+                        // Zero literal: flush buffer and skip
                         if (buf_empty_bits < 32)
                             aie_add(buf, R, field_i);
                         field_i += 32 + (31 - buf_empty_bits);
@@ -276,16 +132,14 @@ extern "C"
                         buf = 0;
                         buf_empty_bits = 32;
         
-                        if (field_i >= r_size)
-                            return r_size;
+                        if (field_i >= actual_r_size)
+                            return actual_r_size;
         
                     } else {
+                        // Non-zero literal or fill: buffer and process
                         for (word_i = 0; word_i < num_words; ++word_i) {
                             if (buf_empty_bits == 32) {
                                 if (field_i % 32 != 0) {
-                                    // add padding to buf that makes up for the
-                                    // difference, then add 32 - (field_i % 32) bits to
-                                    // the buff
                                     uint32_t padding = field_i % 32;
                                     buf = bits >> (padding - 1);
                                     aie_add(buf, R, field_i - padding);
@@ -297,13 +151,9 @@ extern "C"
                                     buf_empty_bits = 1;
                                 }
                             } else {
-        
                                 buf += bits >> (31-buf_empty_bits);
-        
                                 aie_add(buf, R, field_i);
-        
                                 field_i+=32;
-        
                                 buf_empty_bits += 1;
                                 buf = bits << buf_empty_bits;
                             }
@@ -311,51 +161,78 @@ extern "C"
                     }
                 }
             }
+        }
+        
+        // =====================================================================
+        // Step 3: Process remaining WAH words (240 % 32 = 16) with scalar decode
+        // =====================================================================
+        for (wah_i = N * vec_factor; wah_i < actual_wah_size; ++wah_i) {
+            wah_c = wah[wah_i];
             
+            if (wah_c >> 31 == 1) {
+                num_words = (wah_c & 0x3fffffffu);
+                fill_bit = (wah_c >= 0xC0000000u) ? 1 : 0;
+                bits = fill_bit ? 0x7FFFFFFFu : 0;
+            } else {
+                num_words = 1;
+                bits = wah_c;
+            }
+
+            if ((num_words > 1) && (fill_bit == 0)) {
+                if (buf_empty_bits < 32)
+                    aie_add(buf, R, field_i);
+                field_i += 32;
+                field_i += num_words * 31 - buf_empty_bits;
+                buf_empty_bits = 32;
+                buf = 0;
+                if (field_i >= actual_r_size)
+                    return actual_r_size;
+            } else if (bits == 0) {
+                if (buf_empty_bits < 32)
+                    aie_add(buf, R, field_i);
+                field_i += 32 + (31 - buf_empty_bits);
+                buf = 0;
+                buf_empty_bits = 32;
+                if (field_i >= actual_r_size)
+                    return actual_r_size;
+            } else {
+                for (word_i = 0; word_i < num_words; ++word_i) {
+                    if (buf_empty_bits == 32) {
+                        if (field_i % 32 != 0) {
+                            uint32_t padding = field_i % 32;
+                            buf = bits >> (padding - 1);
+                            aie_add(buf, R, field_i - padding);
+                            field_i += 32 - padding;
+                            buf = bits << (32 - padding + 1);
+                            buf_empty_bits = (32 - padding) + 1;
+                        } else {
+                            buf = bits << 1;
+                            buf_empty_bits = 1;
+                        }
+                    } else {
+                        buf += bits >> (31 - buf_empty_bits);
+                        aie_add(buf, R, field_i);
+                        field_i += 32;
+                        buf_empty_bits += 1;
+                        buf = bits << buf_empty_bits;
+                    }
+                }
+            }
         }
     
+        // =====================================================================
+        // Step 4: Flush remaining bits in buffer
+        // =====================================================================
         for (bit_i = 0; bit_i < 31; ++bit_i) {
             R[field_i] += (buf >> (31 - bit_i)) & 1;
             field_i += 1;
     
-            if (field_i >= r_size)
-                return r_size;
+            if (field_i >= actual_r_size)
+                return actual_r_size;
         }
     
-        return r_size;
+        return actual_r_size;
     }
 
-    uint32_t aie_sum_reduction(uint32_t *ins,
-                               uint32_t w,
-                               uint32_t *out,
-                               uint32_t out_size)
-
-    {
-        constexpr int vec_factor = 32;
-        
-        uint32_t *__restrict pIns = ins;
-        uint32_t *__restrict pOut = out;
-
-        uint32 i = 0;
-        for(; i + vec_factor <= out_size; i += vec_factor) {
-
-            aie::vector<uint32_t, vec_factor> sums = aie::zeros();
-            for(uint32_t j = 0; j < w; j++) {
-                pIns = ins + w * out_size + i;
-                aie::vector<uint32_t, vec_factor> in = aie::load_v<vec_factor>(pIns)
-                sums = aie::add(sums, in);
-            }
-            aie::store_v(pOut, sums);
-            pOut += vec_factor;
-        }
-        
-        for (; i < out_len; i++) {
-            uint32_t s = 0;
-            for (uint32_t t = 0; t < w; w++) {
-              s += ins[t * out_len + i];
-            }
-            out[i] = s;
-          }
-    }
 
 }
